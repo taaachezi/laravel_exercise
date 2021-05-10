@@ -16,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get("/","PlayersController@index");
-Route::get("/index","PlayersController@index");
+// Route::get("/","PlayersController@index");
+// Route::get("/index","PlayersController@index");
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get("/folders/{id}/tasks", "TaskController@index")->name("tasks.index");

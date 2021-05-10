@@ -1,3 +1,4 @@
+@extends("../home")
 <table>
 	<tr>
 		<th>ID</th>
