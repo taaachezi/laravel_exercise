@@ -26,10 +26,10 @@ class TasksTableSeeder extends Seeder
         	]);
         }
     }
-    public function showCreateForm(int $id)
-    {
-    	return view("tasks/create",[
-    		"folder_id"=>$id
-    	]);
-    }
+    // public function showCreateForm(int $id)
+    // {
+    // 	return view("tasks/create",[
+    // 		"folder_id"=>$id
+    // 	]);
+    // }
 }
