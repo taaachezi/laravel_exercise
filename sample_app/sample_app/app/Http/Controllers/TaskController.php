@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function index(int $id = 1)
+    public function index(Folder $folder)
     {
     	$folders = Auth::user()->folders()->get();
 
     	$current_folder = Folder::find($id);
 
-    	$tasks = $current_folder->tasks()->get();
+    	$tasks = $folder->tasks()->get();
 
     	return view("tasks/index", [
     		"folders"=>$folders,
@@ -26,28 +26,27 @@ class TaskController extends Controller
     	]);
     }
 
-     public function showCreateForm(int $id)
+     public function showCreateForm(Folder $folder)
     {
     	return view("tasks/create", [
-    		"folder_id" => $id
+    		"folder_id" => $folder->id
     	]);
     }
 
-    public function create(int $id, CreateTask $request)
+    public function create(Folder $folder, CreateTask $request)
     {
-    	$current_folder = Folder::find($id);
 
     	$task = new Task();
     	$task->title = $request->title;
     	$task->due_date = $request->due_date;
-    	$current_folder->tasks()->save($task);
+    	$folder->tasks()->save($task);
 
     	return redirect()->route("tasks.index", [
-    		"id"=>$current_folder->id,
+    		"id"=>$folder->id,
     	]);
     }
-    
-    public function showEditForm(int $id, int $task_id)
+
+    public function showEditForm(Folder $folder, int $task_id)
     {
         $task = Task::find($task_id);
 
@@ -55,8 +54,8 @@ class TaskController extends Controller
             "task" => $task,
         ]);
     }
-    
-    public function edit(int $id, int $task_id, EditTask $request)
+
+    public function edit(Folder $folder, int $task_id, EditTask $request)
     {
         $task = Task::find($task_id);
 
@@ -69,5 +68,5 @@ class TaskController extends Controller
             "id" => $task->folder_id,
         ]);
     }
-    
+
 }
